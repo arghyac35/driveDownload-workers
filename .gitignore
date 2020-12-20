@@ -39,6 +39,3 @@ yarn.lock
 dist
 tmp
 package-lock.json
-
-# Test configurations
-*.webpack.config.js

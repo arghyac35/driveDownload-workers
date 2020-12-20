@@ -9,9 +9,7 @@ function createWebpackConfig(env) {
   let {
     disabledPatterns,
     enabledPatterns,
-    exampleGreeting,
     filename,
-    metadataPath,
     minify,
     printOutput: verbose,
     useColors: colors,
@@ -43,24 +41,6 @@ function createWebpackConfig(env) {
 
     module: {
       rules: [
-        /*
-        This causes scripts attempting to use Node's built-in APIs or global
-          objects to fail, e.g. `Buffer` and `require('crypto')`. Install and
-          require() shim modules manually if you wish to use these features.
-       */
-        {
-          // include: entry,
-          test: /\.m?js$/,
-          exclude: /\/node_modules\//,
-          loader: 'eslint-loader',
-          options: {
-            failOnError: true,
-            failOnWarning: false,
-            pre: true,
-            // rules: {'prettier/prettier': 'off',
-            // },
-          },
-        },
         /*
         This runs all JS through Babel to ensure compatibility with the
           Cloudflare Worker (i.e. latest Chrome) runtime.
@@ -128,7 +108,7 @@ function createWebpackConfig(env) {
         variables you wish to inject
     */
       new webpack.DefinePlugin({
-        INJECTED_VARIABLE: JSON.stringify(exampleGreeting),
+        INJECTED_VARIABLE: JSON.stringify("example"),
       }),
 
       /*
@@ -140,7 +120,6 @@ function createWebpackConfig(env) {
         emoji,
         enabled: deploy,
         enabledPatterns,
-        metadataPath,
         reset,
         site,
         verbose,
@@ -150,7 +129,4 @@ function createWebpackConfig(env) {
   }
 }
 
-module.exports =
-  process.env.NODE_ENV === 'testing'
-    ? createWebpackConfig
-    : createWebpackConfig()
+module.exports = createWebpackConfig()
