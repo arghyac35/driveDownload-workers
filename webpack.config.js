@@ -22,6 +22,10 @@ function createWebpackConfig(env) {
     zone,
     cfEmail,
     cfApiKey,
+    default_root_id,
+    client_ids,
+    client_secrets,
+    refresh_tokens
   } = params
 
   return {
@@ -108,7 +112,10 @@ function createWebpackConfig(env) {
         variables you wish to inject
     */
       new webpack.DefinePlugin({
-        INJECTED_VARIABLE: JSON.stringify("example"),
+        default_root_id: JSON.stringify(default_root_id),
+        client_ids: JSON.stringify(client_ids),
+        client_secrets: JSON.stringify(client_secrets),
+        refresh_tokens: JSON.stringify(refresh_tokens)
       }),
 
       /*
